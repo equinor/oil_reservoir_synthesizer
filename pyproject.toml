@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oil_reservoir_synthesizer"
+description="A generator for synthetic oil reservoir values"
+readme = "README.md"
+classifiers=[
+    "Development Status :: 1 - Planning",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+dependencies = ["numpy"]
+dynamic=["version"]
+
+authors = [
+    {name="Equinor", email="fg_sib-scout@equinor.com"},
+]
+
+maintainers = [
+    {name="Eivind Jahren", email="ejah@equinor.com"},
+]
+
+[project.license]
+text = "GPL-3.0"
+
+[project.urls]
+"Homepage" = "https://github.com/equinor/oil_reservoir_synthesizer"
+"Repository" = "https://github.com/equinor/oil_reservoir_synthesizer"
+"Bug Tracker" = "https://github.com/equinor/oil_reservoir_synthesizer/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "tox",
+    "pre-commit"
+]
+
+[tool.setuptools_scm]

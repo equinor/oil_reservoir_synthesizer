@@ -1,4 +1,4 @@
-oil-reservoir-synthesizer
+Oil Reservoir Synthesizer
 ==========
 
 A generator for synthetic oil reservoir values
@@ -9,4 +9,5 @@ A generator for synthetic oil reservoir values
 
 ## testing
 
-    pytest
+    pip install -e  .[dev]
+    tox test
