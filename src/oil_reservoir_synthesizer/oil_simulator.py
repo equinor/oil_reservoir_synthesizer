@@ -1,7 +1,7 @@
-from . import ShapeFunction, ShapeCreator
+from .shaped_perlin import ShapeCreator, ShapeFunction
 
 
-class OilSimulator(object):
+class OilSimulator:
     OPR_SHAPE = ShapeFunction([0.0, 0.2, 0.5, 0.7, 1.0], [0.0, 0.7, 0.2, 0.1, 0.01])
     GPR_SHAPE = ShapeFunction([0.0, 0.2, 0.5, 0.7, 1.0], [0.0, 0.5, 0.7, 0.7, 0.3])
     WPR_SHAPE = ShapeFunction([0.0, 0.2, 0.5, 0.7, 1.0], [0.0, 0.01, 0.3, 0.7, 1])
@@ -95,7 +95,7 @@ class OilSimulator(object):
         self._fwpr = 0.0
         self._fgor = 0.0
         self._fwct = 0.0
-        for key in self._wells:
+        for key, well in self._wells.items():
             oprFunction = self._oprFunc[key]
             gprFunction = self._gprFunc[key]
             wprFunction = self._wprFunc[key]
@@ -103,7 +103,6 @@ class OilSimulator(object):
             gpr_value = gprFunction(self._current_step, scale)
             wpr_value = wprFunction(self._current_step, scale)
 
-            well = self._wells[key]
             if self._foip > 0.0:
                 well["opr"] = opr_value
                 well["opt"] += opr_value
@@ -126,14 +125,11 @@ class OilSimulator(object):
         self._fgip -= self._fgpr
         self._fwip -= self._fwpr
 
-        if self._foip < 0.0:
-            self._foip = 0.0  # This may lead to the total (FOPT) larger than OOIP
-
-        if self._fgip < 0.0:
-            self._fgip = 0.0
-
-        if self._fwip < 0.0:
-            self._fwip = 0.0
+        self._foip = max(
+            self._foip, 0.0
+        )  # This may lead to the total (FOPT) larger than OOIP
+        self._fgip = max(self._fgip, 0.0)
+        self._fwip = max(self._fwip, 0.0)
 
         self._fopt += self._fopr
         self._fgpt += self._fgpr

@@ -1,4 +1,5 @@
-import random, numbers
+import numbers
+import random
 
 
 def rwh_primes2(n):
@@ -8,7 +9,7 @@ def rwh_primes2(n):
     n = {0: n, 1: n - 1, 2: n + 4, 3: n + 3, 4: n + 2, 5: n + 1}[n % 6]
     sieve = [True] * (n // 3)
     sieve[0] = False
-    for i in range(int(n ** 0.5) // 3 + 1):
+    for i in range(int(n**0.5) // 3 + 1):
         if sieve[i]:
             k = 3 * i + 1 | 1
             sieve[((k * k) // 3) :: 2 * k] = [False] * (
@@ -20,7 +21,7 @@ def rwh_primes2(n):
     return [2, 3] + [3 * i + 1 | 1 for i in range(1, n // 3 - correction) if sieve[i]]
 
 
-class PrimeGenerator(object):
+class PrimeGenerator:
     LIST_OF_PRIMES = rwh_primes2(10000)
 
     def __init__(self, seed=None):
@@ -30,9 +31,9 @@ class PrimeGenerator(object):
 
     def __getitem__(self, index):
         if not isinstance(index, numbers.Rational) or index < 0:
-            raise IndexError("Index must be a positive integer: %d" % index)
+            raise IndexError(f"Index must be a positive integer: {index}")
 
-        if not index in self.__primes:
+        if index not in self.__primes:
             p1 = self.randomPrime()
             self.__primes[index] = p1
 
