@@ -1,6 +1,6 @@
 from pkg_resources import DistributionNotFound, get_distribution
 
-from .oil_simulator import OilSimulator
+from ._oil_simulator import OilSimulator
 
 __author__ = """Equinor"""
 __email__ = "fg_sib-scout@equinor.com"
