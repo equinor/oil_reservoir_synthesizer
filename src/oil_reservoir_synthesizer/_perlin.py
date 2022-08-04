@@ -1,6 +1,6 @@
 import math
 
-from .prime_generator import PrimeGenerator
+from ._prime_generator import PrimeGenerator
 
 
 class PerlinNoise:

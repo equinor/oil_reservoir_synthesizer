@@ -1,4 +1,4 @@
-from .shaped_perlin import ShapeCreator, ShapeFunction
+from ._shaped_perlin import ShapeCreator, ShapeFunction
 
 
 class OilSimulator:
