@@ -2,9 +2,9 @@ Oil Reservoir Synthesizer
 ==========
 
 A generator for synthetic oil reservoir simulator results based
-on [perlin noise](https://en.wikipedia.org/wiki/Perlin_noise). The
+on [Perlin noise](https://en.wikipedia.org/wiki/Perlin_noise). The
 values generated are pseudo-random but retains the nice properties
-of perlin noise.
+of Perlin noise.
 
 The values generated have names (such as fopr) that are derived from oil
 simulators such as [opm-flow](opm-project.org).
@@ -20,11 +20,11 @@ from oil_reservoir_synthesizer import OilSimulator
 
 simulator = OilSimulator()
 
-# build a model with one well and block
+# Build a model with one well and block
 simulator.addWell("wellName", seed=997)
 simulator.addBlock("5,5,5", seed=31)
 
-#run simulation
+# Run simulation
 num_steps = 10
 fopr_values = [] # oil production rate for each time step
 for time_steps in range(num_steps):
@@ -34,16 +34,15 @@ for time_steps in range(num_steps):
 ```
 
 
-
-## building
+## Building
 
     pip install .
 
-## testing
+## Testing
 
-    pip install -e  .[dev]
+    pip install -e .[dev]
     tox test
 
 ## About
 
-this project was split out of github.com/equinor/ert and github.com/equinor/libres .
+This project was split out of https://github.com/equinor/ert and https://github.com/equinor/libres.
