@@ -12,7 +12,7 @@ class PerlinNoise:
             prime_generator if prime_generator is not None else PrimeGenerator()
         )
 
-    def cosineInterpolation(self, a, b, x):
+    def cosine_interppolation(self, a, b, x):
         ft = x * 3.1415927
         f = (1.0 - math.cos(ft)) * 0.5
         return a * (1 - f) + b * f
@@ -25,25 +25,25 @@ class PerlinNoise:
         x = (x * (x * x * 15731 + 789221) + 1376312589) & PerlinNoise.MAX_INT
         return 1.0 - x / 1073741824.0
 
-    def smoothedNoise(self, x, perturbation):
+    def smoothed_noise(self, x, perturbation):
         return (
             self.noise(x, perturbation) / 2.0
             + self.noise(x - 1, perturbation) / 4.0
             + self.noise(x + 1, perturbation) / 4.0
         )
 
-    def interpolatedNoise(self, x, octave_number):
+    def interpolated_noise(self, x, octave_number):
         int_x = int(x)
         frac_x = x - int_x
 
         perturbation = self.octave_primes[octave_number]
 
-        v1 = self.smoothedNoise(int_x, perturbation)
-        v2 = self.smoothedNoise(int_x + 1, perturbation)
+        v1 = self.smoothed_noise(int_x, perturbation)
+        v2 = self.smoothed_noise(int_x + 1, perturbation)
 
-        return self.cosineInterpolation(v1, v2, frac_x)
+        return self.cosine_interppolation(v1, v2, frac_x)
 
-    def perlinNoise1D(self, x):
+    def perlin_noise_1d(self, x):
         total = 0.0
 
         for octave in range(int(self.number_of_octaves) - 1):
@@ -51,14 +51,14 @@ class PerlinNoise:
             amplitude = math.pow(self.persistence, octave)
 
             total += (
-                self.interpolatedNoise(x * frequency, octave_number=octave) * amplitude
+                self.interpolated_noise(x * frequency, octave_number=octave) * amplitude
             )
 
         return total
 
     def __getitem__(self, x):
         """:rtype: float"""
-        return self.perlinNoise1D(x * 10.0)
+        return self.perlin_noise_1d(x * 10.0)
 
     def __call__(self, x):
         """:rtype: float"""

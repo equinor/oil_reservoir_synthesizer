@@ -34,11 +34,11 @@ class PrimeGenerator:
             raise IndexError(f"Index must be a positive integer: {index}")
 
         if index not in self.__primes:
-            p1 = self.randomPrime()
+            p1 = self.random_prime()
             self.__primes[index] = p1
 
         return self.__primes[index]
 
-    def randomPrime(self):
+    def random_prime(self):
         random_index = self.__random.randint(0, len(PrimeGenerator.LIST_OF_PRIMES) - 1)
         return PrimeGenerator.LIST_OF_PRIMES[random_index]

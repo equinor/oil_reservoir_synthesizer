@@ -1,8 +1,11 @@
 # ruff: noqa: PLR2004
+from warnings import warn
+
 from ._shaped_perlin import ShapeCreator, ShapeFunction
 
 
 class OilSimulator:
+    # pylint: disable=too-many-public-methods
     """OilSimulator is the builder of the model and the generator of the values.
 
 
@@ -29,10 +32,10 @@ class OilSimulator:
         self._fgip = self.goip = goip
         self._fwip = self.woip = woip
 
-        self._oprFunc = {}  # Oil production rate function for each well
-        self._gprFunc = {}  # Gas production rate function for each well
-        self._wprFunc = {}  # Water produtcion rate function for each well
-        self._bprFunc = {}  # Pressure function for each block
+        self._opr_func = {}  # Oil production rate function for each well
+        self._gpr_func = {}  # Gas production rate function for each well
+        self._wpr_func = {}  # Water produtcion rate function for each well
+        self._bpr_func = {}  # Pressure function for each block
         self._current_step = 0
 
         self._fopt = 0.0  # Oil production total for entire reservoir
@@ -48,14 +51,21 @@ class OilSimulator:
         self._wells = {}
         self._bpr = {}  # Block pressure for each block
 
-    def addWell(  # noqa: PLR0913
+    def addWell(self, *args, **kwargs):
+        # pylint: disable=invalid-name
+        warn(
+            "addWell() is deprecated. Use add_well().", DeprecationWarning, stacklevel=2
+        )
+        self.add_well(*args, **kwargs)
+
+    def add_well(  # noqa: PLR0913
         self, name, seed, persistence=0.2, octaves=8, divergence_scale=1.0, offset=0.0
     ):
         """Add a well to the simulator model."""
-        oil_div = OilSimulator.O_DIVERGENCE.scaledCopy(divergence_scale)
-        gas_div = OilSimulator.G_DIVERGENCE.scaledCopy(divergence_scale)
-        water_div = OilSimulator.W_DIVERGENCE.scaledCopy(divergence_scale)
-        self._oprFunc[name] = ShapeCreator.createNoiseFunction(
+        oil_div = OilSimulator.O_DIVERGENCE.scaled_copy(divergence_scale)
+        gas_div = OilSimulator.G_DIVERGENCE.scaled_copy(divergence_scale)
+        water_div = OilSimulator.W_DIVERGENCE.scaled_copy(divergence_scale)
+        self._opr_func[name] = ShapeCreator.create_noise_function(
             OilSimulator.OPR_SHAPE,
             oil_div,
             seed,
@@ -64,7 +74,7 @@ class OilSimulator:
             cutoff=0.0,
             offset=offset,
         )
-        self._gprFunc[name] = ShapeCreator.createNoiseFunction(
+        self._gpr_func[name] = ShapeCreator.create_noise_function(
             OilSimulator.GPR_SHAPE,
             gas_div,
             seed * 7,
@@ -73,7 +83,7 @@ class OilSimulator:
             cutoff=0.0,
             offset=offset,
         )
-        self._wprFunc[name] = ShapeCreator.createNoiseFunction(
+        self._wpr_func[name] = ShapeCreator.create_noise_function(
             OilSimulator.WPR_SHAPE,
             water_div,
             seed * 11,
@@ -92,9 +102,18 @@ class OilSimulator:
             "wpt": 0.0,
         }
 
-    def addBlock(self, name, seed, persistence=0.2):
+    def addBlock(self, *args, **kwargs):
+        # pylint: disable=invalid-name
+        warn(
+            "addBlock() is deprecated. Use add_block().",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        self.add_block(*args, **kwargs)
+
+    def add_block(self, name, seed, persistence=0.2):
         """Add a grid block to the model"""
-        self._bprFunc[name] = ShapeCreator.createNoiseFunction(
+        self._bpr_func[name] = ShapeCreator.create_noise_function(
             OilSimulator.BPR_SHAPE,
             OilSimulator.B_DIVERGENCE,
             seed,
@@ -114,12 +133,12 @@ class OilSimulator:
         self._fgor = 0.0
         self._fwct = 0.0
         for key, well in self._wells.items():
-            oprFunction = self._oprFunc[key]
-            gprFunction = self._gprFunc[key]
-            wprFunction = self._wprFunc[key]
-            opr_value = oprFunction(self._current_step, scale)
-            gpr_value = gprFunction(self._current_step, scale)
-            wpr_value = wprFunction(self._current_step, scale)
+            opr_function = self._opr_func[key]
+            gpr_function = self._gpr_func[key]
+            wpr_function = self._wpr_func[key]
+            opr_value = opr_function(self._current_step, scale)
+            gpr_value = gpr_function(self._current_step, scale)
+            wpr_value = wpr_function(self._current_step, scale)
 
             if self._foip > 0.0:
                 well["opr"] = opr_value
@@ -157,8 +176,8 @@ class OilSimulator:
         self._fwct /= len(self._wells)
 
         for key in self._bpr:
-            bprFunction = self._bprFunc[key]
-            self._bpr[key] = bprFunction(self._current_step, scale)
+            bpr_function = self._bpr_func[key]
+            self._bpr[key] = bpr_function(self._current_step, scale)
 
         self._current_step += 1
 

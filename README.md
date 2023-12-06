@@ -20,8 +20,8 @@ from oil_reservoir_synthesizer import OilSimulator
 simulator = OilSimulator()
 
 # Build a model with one well and block
-simulator.addWell("wellName", seed=997)
-simulator.addBlock("5,5,5", seed=31)
+simulator.add_well("wellName", seed=997)
+simulator.add_block("5,5,5", seed=31)
 
 # Run simulation
 num_steps = 10
