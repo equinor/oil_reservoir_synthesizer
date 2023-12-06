@@ -8,7 +8,14 @@ repos:
     -   id: trailing-whitespace
 
 -   repo: https://github.com/ambv/black
-    rev: 22.6.0
+    rev: 23.11.0
     hooks:
     - id: black
+
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.6
+    hooks:
+    - id: ruff
+      args: [ --fix ]
+
 exclude: tests/testdata/eclipse
