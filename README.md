@@ -1,5 +1,4 @@
-Oil Reservoir Synthesizer
-==========
+# Oil Reservoir Synthesizer
 
 A generator for synthetic oil reservoir simulator results based
 on [Perlin noise](https://en.wikipedia.org/wiki/Perlin_noise). The
@@ -26,23 +25,27 @@ simulator.addBlock("5,5,5", seed=31)
 
 # Run simulation
 num_steps = 10
-fopr_values = [] # oil production rate for each time step
+fopr_values = []  # oil production rate for each time step
 for time_steps in range(num_steps):
     simulator.step(scale=1.0 / num_steps)
     fopr_values.append(simulator.fopr())
 
 ```
 
-
 ## Building
 
-    pip install .
+```sh
+pip install .
+```
 
 ## Testing
 
-    pip install -e .[dev]
-    tox test
+```sh
+pip install -e .[dev]
+tox test
+```
 
-## About
+## History
 
-This project was split out of https://github.com/equinor/ert and https://github.com/equinor/libres.
+This project was split out of [ERT](https://github.com/equinor/ert) and
+[libres](https://github.com/equinor/libres).
