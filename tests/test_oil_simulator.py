@@ -153,8 +153,8 @@ EXPECTED_VALUES = [
 
 def test_oil_simulator():
     sim = OilSimulator()
-    sim.addWell("OP1", seed=1)
-    sim.addBlock("6,6,6", seed=2)
+    sim.add_well("OP1", seed=1)
+    sim.add_block("6,6,6", seed=2)
 
     for report_step in range(10):
         sim.step(scale=1.0 / 10.0)

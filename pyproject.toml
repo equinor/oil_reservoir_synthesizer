@@ -54,3 +54,13 @@ select = [
   "F",   # pyflakes
   "PL",  # pylint
 ]
+
+[tool.pylint]
+disable = [
+  "missing-class-docstring",
+  "missing-docstring",
+  "missing-module-docstring",
+  "too-few-public-methods",
+  "too-many-arguments",
+  "too-many-instance-attributes",
+]
