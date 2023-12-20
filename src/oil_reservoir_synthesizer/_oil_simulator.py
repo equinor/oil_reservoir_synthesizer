@@ -1,3 +1,4 @@
+# ruff: noqa: PLR2004
 from ._shaped_perlin import ShapeCreator, ShapeFunction
 
 
@@ -47,7 +48,7 @@ class OilSimulator:
         self._wells = {}
         self._bpr = {}  # Block pressure for each block
 
-    def addWell(
+    def addWell(  # noqa: PLR0913
         self, name, seed, persistence=0.2, octaves=8, divergence_scale=1.0, offset=0.0
     ):
         """Add a well to the simulator model."""

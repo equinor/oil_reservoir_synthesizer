@@ -51,7 +51,7 @@ class ConstantShapeFunction(ShapeFunction):
 
 
 class ShapedNoise:
-    def __init__(
+    def __init__(  # noqa: PLR0913
         self, noiseFunction, shapeFunction, divergenceFunction, offset=0.0, cutoff=None
     ):
         self.shapeFunction = shapeFunction
@@ -88,7 +88,7 @@ class ShapeCreator:
         return ShapeFunction(x_values, y_values)
 
     @staticmethod
-    def createShapedPerlinFunction(
+    def createShapedPerlinFunction(  # noqa: PLR0913
         divergence_x,
         divergence_y,
         shape_seed=None,
@@ -116,7 +116,7 @@ class ShapeCreator:
         )
 
     @staticmethod
-    def createNoiseFunction(
+    def createNoiseFunction(  # noqa: PLR0913
         shapeFunction=None,
         divergenceFunction=None,
         seed=None,

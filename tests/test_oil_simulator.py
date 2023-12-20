@@ -1,4 +1,5 @@
 import pytest
+
 from oil_reservoir_synthesizer import OilSimulator
 
 EXPECTED_VALUES = [

@@ -43,3 +43,14 @@ dev = [
 ]
 
 [tool.setuptools_scm]
+
+[tool.ruff]
+src = ["src"]
+select = [
+  "W",   # pycodestyle
+  "I",   # isort
+  "B",   # flake-8-bugbear
+  "SIM", # flake-8-simplify
+  "F",   # pyflakes
+  "PL",  # pylint
+]
