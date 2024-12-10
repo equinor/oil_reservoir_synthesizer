@@ -2,6 +2,7 @@
 This package generates synthetic oil simulator data based
 on perlin noise. See :py:class:`OilSimulator`.
 """
+
 from importlib.metadata import version
 
 from ._oil_simulator import OilSimulator
