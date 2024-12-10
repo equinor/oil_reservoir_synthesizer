@@ -10,9 +10,6 @@ classifiers=[
     "Development Status :: 1 - Planning",
     "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
@@ -46,6 +43,8 @@ dev = [
 
 [tool.ruff]
 src = ["src"]
+
+[tool.ruff.lint]
 select = [
   "W",   # pycodestyle
   "I",   # isort
@@ -53,6 +52,7 @@ select = [
   "SIM", # flake-8-simplify
   "F",   # pyflakes
   "PL",  # pylint
+  "UP",  # pyupgrade
 ]
 
 [tool.pylint]
