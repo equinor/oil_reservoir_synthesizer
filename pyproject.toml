@@ -46,13 +46,18 @@ src = ["src"]
 
 [tool.ruff.lint]
 select = [
-  "W",   # pycodestyle
-  "I",   # isort
-  "B",   # flake-8-bugbear
-  "SIM", # flake-8-simplify
-  "F",   # pyflakes
-  "PL",  # pylint
-  "UP",  # pyupgrade
+  "ALL"
+]
+ignore = [
+    "ANN",
+    "COM",
+    "D",
+    "EM",
+    "N",
+    "RET",
+    "RUF",
+    "S",
+    "TRY",
 ]
 
 [tool.pylint]
